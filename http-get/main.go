@@ -42,7 +42,7 @@ func main(){
 	// we need to close that stream and to do that we invoke the following command which the defer would execute the function after all other functions have ran successfully
 	// The response body is streamed on demand as the Body field is streamed on demand (continously) hence need to close the stream of the response body
 	defer response.Body.Close()
-
+ 
 	//since we now know our body would fit into our available memory, then we can read the data all at once
 	// io.ReadAll reads all the data from the response body
 	body, err := io.ReadAll(response.Body)
@@ -55,6 +55,8 @@ func main(){
 		fmt.Printf("Invalid output (HTTP Code %d): %s \n", response.StatusCode, body)
 		os.Exit(1)
 	}
+
+	fmt.Printf("HTTP Status code: %d\n Body:%s\n", response.StatusCode, body)
 }
 
 
